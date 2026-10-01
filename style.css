@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  background: #f4f4f5;
+}
+
+.hint {
+  position: absolute;
+  margin: 16px;
+  color: #52525b;
+}
+
+#box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: #e4572e;
+  border-radius: 8px;
+}
