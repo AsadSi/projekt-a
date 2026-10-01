@@ -19,10 +19,23 @@ function render() {
 
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
-    case "ArrowUp":    y -= STEP; break;
-    case "ArrowDown":  y += STEP; break;
-    case "ArrowLeft":  x -= STEP; break;
-    case "ArrowRight": x += STEP; break;
+    // Stacked cases fall through: all three keys run the same line
+    case "ArrowUp":
+    case "w":
+    case "W":
+      y -= STEP; break;
+    case "ArrowDown":
+    case "s":
+    case "S":
+      y += STEP; break;
+    case "ArrowLeft":
+    case "a":
+    case "A":
+      x -= STEP; break;
+    case "ArrowRight":
+    case "d":
+    case "D":
+      x += STEP; break;
     default: return; // ignore all other keys
   }
   event.preventDefault(); // stop the arrow keys from scrolling the page
