@@ -1,4 +1,7 @@
 const box = document.getElementById("box");
+if (!box) {
+  throw new Error("Box element not found");
+}
 const STEP = 20; // pixels per key press
 
 // Start in the middle of the window
