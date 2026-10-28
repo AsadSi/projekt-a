@@ -8,6 +8,9 @@
   </head>
   <body>
     <p class="hint">Use the arrow keys or W/A/S/D to move the box.</p>
+    <label for="step">Step size</label>
+    <input type="number" id="step" min="1" max="100" value="20" />
+    <p id="step-error" role="alert"></p>
     <div id="box"></div>
     <script src="script.js"></script>
   </body>

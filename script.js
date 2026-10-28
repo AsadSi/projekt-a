@@ -1,5 +1,25 @@
 const box = document.getElementById("box");
-const STEP = 20; // pixels per key press
+if (!box) {
+  throw new Error("Box element not found");
+}
+let STEP = 20; // pixels per key press
+
+const stepInput = document.getElementById("step");
+const stepError = document.getElementById("step-error");
+if (!stepInput || !stepError) {
+  throw new Error("Step input or error element not found");
+}
+
+stepInput.addEventListener("change", () => {
+  // Number("") is 0, so an empty field fails the range check too
+  const value = Number(stepInput.value);
+  if (Number.isFinite(value) && value >= 1 && value <= 100) {
+    STEP = value;
+    stepError.textContent = "";
+  } else {
+    stepError.textContent = "Step size must be a number from 1 to 100.";
+  }
+});
 
 // Start in the middle of the window
 let x = (window.innerWidth - box.offsetWidth) / 2;
