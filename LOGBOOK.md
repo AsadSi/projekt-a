@@ -56,3 +56,5 @@ Entries are drafted with Claude (AI) from the Git history and our sessions, then
   used port 3000. Serving `index.html` for every request broke the CSS and JS, because the
   browser got HTML back for `style.css` and `script.js`. Later a test failed with `EADDRINUSE`:
   my old server was still running on port 8080, and two programs can't listen on one port.
+  Reviewing PR #5 before merging found the server handed out `/.git/config`; in a real project
+  that would leak a `.env` file too. Fixed by refusing any path part that starts with a dot.

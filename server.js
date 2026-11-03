@@ -27,8 +27,11 @@ const server = http.createServer((req, res) => {
   const filePath = path.join(root, urlPath === "/" ? "index.html" : urlPath);
 
   // Path traversal guard: a request like "/../../secret.txt" would join to a path OUTSIDE our folder.
-  // If the final path doesn't start with our folder, refuse with 403 Forbidden.
-  if (!filePath.startsWith(root + path.sep)) {
+  // Hidden files and folders (".git", ".env", ".vscode") are inside it, but must never be served either.
+  // If the path leaves our folder, or any part of it starts with a dot, refuse with 403 Forbidden.
+  const leavesRoot = !filePath.startsWith(root + path.sep);
+  const isHidden = urlPath.split("/").some((part) => part.startsWith("."));
+  if (leavesRoot || isHidden) {
     res.writeHead(403, { "Content-Type": "text/plain" });
     res.end("Forbidden");
     return; // stop here, don't read anything
